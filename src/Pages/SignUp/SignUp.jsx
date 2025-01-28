@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 // import { AuthContext } from "../Context/AuthProvider";
 // import { AuthContext } from './AuthProvider';
 
@@ -43,6 +44,11 @@ const SignUp = () => {
           .then(() => {
             navigate("/");
             setUser({ ...user, displayName: name, photoURL: photo });
+            Swal.fire({
+              title: "User created sucessfully",
+              icon: "success",
+              draggable: true
+            });
           })
           .catch((error) => {
             console.log(error);
