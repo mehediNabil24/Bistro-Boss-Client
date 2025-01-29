@@ -12,7 +12,8 @@ const Login = () => {
   const {userLogin} = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  // const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || '/';
+  console.log(location.state)
 
   useEffect(()=>{
     loadCaptchaEnginge(6)
@@ -33,7 +34,7 @@ const Login = () => {
             icon: "success",
             draggable: true
           });
-          navigate(location.state? location.state: '/')
+          navigate({state: {from:location}})
         })
     }
     const handelValidateCaptcha =(e)=>{
@@ -84,7 +85,8 @@ const Login = () => {
                 {/* <button onClick={handelValidateCaptcha} className="btn btn-outline btn-xs mt-2">Validate</button> */}
               </div>
               <div className="form-control mt-6">
-                <button disabled={disabled} className="btn btn-primary">Login</button>
+                {/* to do : make disabled true */}
+                <button disabled={false} className="btn btn-primary">Login</button>
                 {/* <input className="btn btn-primary" type="submit" value='Login'/> */}
               </div>
             <p><small>New Here? <Link to={'/signup'}> Create An Account</Link></small></p>

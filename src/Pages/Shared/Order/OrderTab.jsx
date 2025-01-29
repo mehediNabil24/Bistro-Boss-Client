@@ -4,7 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { auth } from "../../../firebase/firebase.config";
 const OrderTab = ({ items }) => {
+  const {user} = auth;
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
