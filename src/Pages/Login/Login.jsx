@@ -4,6 +4,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../Components/Social/SocialLogin';
 
 const Login = () => {
   // const captchaRef = useRef(null)
@@ -12,6 +13,7 @@ const Login = () => {
   const {userLogin} = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+ 
   const from = location.state?.from?.pathname || '/';
   console.log(location.state)
 
@@ -34,7 +36,7 @@ const Login = () => {
             icon: "success",
             draggable: true
           });
-          navigate({state: {from:location}})
+          navigate(location.state? location.state: '/')
         })
     }
     const handelValidateCaptcha =(e)=>{
@@ -90,6 +92,7 @@ const Login = () => {
                 {/* <input className="btn btn-primary" type="submit" value='Login'/> */}
               </div>
             <p><small>New Here? <Link to={'/signup'}> Create An Account</Link></small></p>
+            <SocialLogin></SocialLogin>
             </form>
           </div>
         </div>

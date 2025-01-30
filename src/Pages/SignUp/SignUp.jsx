@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/Social/SocialLogin";
 // import { AuthContext } from "../Context/AuthProvider";
 // import { AuthContext } from './AuthProvider';
 
@@ -12,6 +14,7 @@ const SignUp = () => {
     useContext(AuthContext);
   const [showError, setShowError] = useState("");
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,13 +45,25 @@ const SignUp = () => {
         setUser(result.user);
         updatedUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
-            navigate("/");
+            const userInfo = {
+              name,
+              email
+
+            }
+            axiosPublic.post('/users',userInfo)
+            .then(res=>{
+              if(res.data.insertedId){
+                navigate("/");
             setUser({ ...user, displayName: name, photoURL: photo });
             Swal.fire({
               title: "User created sucessfully",
               icon: "success",
               draggable: true
             });
+
+              }
+            })
+            
           })
           .catch((error) => {
             console.log(error);
@@ -132,6 +147,7 @@ const SignUp = () => {
             Login
           </Link>
         </p>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
     </>
