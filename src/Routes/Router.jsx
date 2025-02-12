@@ -13,6 +13,8 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashobard/Cart/Cart";
 import AllUser from "../Pages/Dashobard/AllUser/AllUser";
+import AddItems from "../Pages/Dashobard/AddItems/AddItems";
+import AdminRoute from "./AdminRoute";
 
   export const router = createBrowserRouter([
     {
@@ -49,12 +51,19 @@ import AllUser from "../Pages/Dashobard/AllUser/AllUser";
       path: 'dashboard',
       element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
+
+        //normal user route
         {
           path: 'cart',
           element: <Cart></Cart>
         },
 
         //admin routes 
+        {
+          path: 'addItems',
+          element: <AdminRoute><AddItems></AddItems></AdminRoute>
+
+        },
         {
           path: 'allUsers',
           element: <AllUser></AllUser>
