@@ -1,10 +1,50 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { FaUtensils } from "react-icons/fa";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
+const image_hosting_key = import.meta.env.VITE_image_hosting_key;
+const image_hosting_api =`https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
 const AddItems = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+  const { register, handleSubmit,reset } = useForm();
+  const onSubmit = async (data) => {
+    console.log(data);
+    const imageFile = { image: data.image[0]}
+    const res= await axiosPublic.post(image_hosting_api, imageFile, {
+        headers: {
+            'Content-Type':'multipart/form-data'
+        }
+    })
+    console.log(res.data)
+    if(res.data.success)
+    {
+        const menuItem ={
+            name: data.name,
+            category:data.category,
+            price:parseFloat(data.price),
+            recipe: data.recipe,
+            image: res.data.data.display_url,
+
+
+        }
+        const menuRes = await axiosSecure.post('/menu',menuItem)
+        console.log(menuRes.data)
+        if(menuRes.data.insertedId){
+            Swal.fire({
+                title: `${data.name} is added`,
+                text: "Good Job",
+                icon: "success"
+              });
+        }
+        reset();
+    }
+    
+}
   return (
     <div>
       <SectionTitle

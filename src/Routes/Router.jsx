@@ -15,6 +15,7 @@ import Cart from "../Pages/Dashobard/Cart/Cart";
 import AllUser from "../Pages/Dashobard/AllUser/AllUser";
 import AddItems from "../Pages/Dashobard/AddItems/AddItems";
 import AdminRoute from "./AdminRoute";
+import ManageItems from "../Pages/Dashobard/ManageItems/ManageItems";
 
   export const router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ import AdminRoute from "./AdminRoute";
           path: 'addItems',
           element: <AdminRoute><AddItems></AddItems></AdminRoute>
 
+        },
+        {
+          path: 'manageItems',
+          element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
         },
         {
           path: 'allUsers',
