@@ -16,6 +16,7 @@ import AllUser from "../Pages/Dashobard/AllUser/AllUser";
 import AddItems from "../Pages/Dashobard/AddItems/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashobard/ManageItems/ManageItems";
+import UpdateItem from "../Pages/Dashobard/UpdateItem/UpdateItem";
 
   export const router = createBrowserRouter([
     {
@@ -68,6 +69,11 @@ import ManageItems from "../Pages/Dashobard/ManageItems/ManageItems";
         {
           path: 'manageItems',
           element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+        },
+        {
+          path:'updateItem/:id',
+          element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+          loader: ({params})=> fetch(`http://localhost:5000/menu/${params.id}`)
         },
         {
           path: 'allUsers',
