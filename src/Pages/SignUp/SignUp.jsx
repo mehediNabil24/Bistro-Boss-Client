@@ -4,8 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import SocialLogin from "../../Components/Social/SocialLogin";
+
 // import { AuthContext } from "../Context/AuthProvider";
 // import { AuthContext } from './AuthProvider';
 

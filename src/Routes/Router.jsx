@@ -17,6 +17,9 @@ import AddItems from "../Pages/Dashobard/AddItems/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashobard/ManageItems/ManageItems";
 import UpdateItem from "../Pages/Dashobard/UpdateItem/UpdateItem";
+import Payment from "../Pages/Dashobard/Payment/Payment";
+import UserHome from "../Pages/Dashobard/UserHome/UserHome";
+import AdminHome from "../Pages/Dashobard/AdminHome/AdminHome";
 
   export const router = createBrowserRouter([
     {
@@ -53,14 +56,28 @@ import UpdateItem from "../Pages/Dashobard/UpdateItem/UpdateItem";
       path: 'dashboard',
       element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
+        
 
         //normal user route
+        {
+          path:'userHome',
+          element: <UserHome></UserHome>
+
+        },
         {
           path: 'cart',
           element: <Cart></Cart>
         },
+        {
+          path: 'payment',
+          element: <Payment></Payment>
+        },
 
         //admin routes 
+        {
+          path: 'adminHome',
+          element: <AdminHome></AdminHome>
+        },
         {
           path: 'addItems',
           element: <AdminRoute><AddItems></AddItems></AdminRoute>
